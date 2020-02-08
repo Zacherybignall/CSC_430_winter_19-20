@@ -1,4 +1,3 @@
-
 -- Database: "R1_test"
 /*
 by :
@@ -8,7 +7,7 @@ Zachery Bignall
 */
 --
 CREATE DATABASE R1_TEST;
--- DROP DATABASE R1_TEST;
+DROP DATABASE R1_TEST;
 USE R1_TEST;
  
 -- Employee table
@@ -47,7 +46,6 @@ create table Manages(
     Constraint l_idFK2 foreign key (l_id) references Location(l_id),
     Constraint empl_idFK2 foreign key (empl_id) references Employee(empl_id)
     );
-
 -- this one needs work/incomplete, confused on if it would pull different names for the supervisor and supervisee
 /* create table Supervision(
 	empl_id int(11) NOT NULL,
@@ -119,66 +117,31 @@ create table Has(
    );
    -- inventory 
    create table Inventory(
-   new_used int(1),
+   new_used Enum ('New', 'Used'),
    car_num INT,
    company varchar(15),
    VIN_NUM varchar(35) NOT NULL,
    car_price INT NOT NULL,
    PRIMARY key (VIN_NUM)
    );
-   insert into Department (EMPL_ID, E_ADDR, E_NAME, E_SALARY) values 
-   ('1', '98 south lane', 'smith,john', '40000'), 
-   ('2', '99 south lane', 'smith,jonny', '60000'), 
-   ('3', '100 south lane', 'Kinddy,Mark', '50000'), 
-   ('4', '101 south lane', 'Oohhun, Lone' , '40000'), 
-   ('5', ' 102south lane', 'Sky,Han', '100000');
-   
-   insert into Department (LOC_ID, L_ADDR, L_PHONE, L_INCOME, L_NAME, PRICE_CHK) values 
-   ('101', '126 that street', '5124891152', '9846000', 'the pink Depot by fengroup', '9840000');
-   
-   insert into Department (BUY_DATE, B_ID, B_NAME, CAR_INFO) values 
-   ('43833', '1', 'Smith,Lane', 'RCA','159648','80000'), 
-   ('43834', '2', 'Jack,Train', '4-os','34Fe5e','5000');
-   
-   insert into Department (DEPT_ID, D_NAME, D_SALARY) values 
-   ('11', 'sells_floor', '10000'), 
-   ('12', 'parts', '5000'), 
-   ('13', 'repair', '300');
-   insert into Department (NEW_USED, CAR_NUM, COMPANY, VIN_NUM, CAR_PRICE) values 
-   ('New', '202', '4-os', '22eft57-a', '59999'), 
-   ('Used ', '203', '4-os', 'ssfj69ij-a', '29999'), 
-   ('New', '204', 'RCA', '33gthry7-s', '39999');
-   
-   insert into Department (PART_NAME, PART_NUM, PART_PRICE) values 
-   ('battery', '1', '100'), 
-   ('brakes pads', '2', '25'), 
-   ('spark plugs', '3', '5'), 
-   ('fuel injector ', '4', '10'), 
-   ('radiator', '5', '45'), 
-   ('car jark', '6', '50'), 
-   ('nuts ', '7', '0.5'), 
-   ('bolts', '8', '0.5'), 
-   ('clutch', '9', '150'), 
-   ('air filter', '10', '23'), 
-   ('muffler', '11', '200'), 
-   ('catalyic converter', '12', '150'), 
-   ('alternator', '13', '300'), 
-   ('seats', '14', '255'), 
-   ('head light blub ', '15', '8'), 
-   ('oil filter ', '16', '15'), 
-   ('fuel filter', '17', '5'), 
-   ('fues', '18', '5'), 
-   ('brake disc', '19', '30'), 
-   ('keys', '20', '500');
-   
-   insert into Department (REPAIR_NO, VIN_NO, REPAIR_PRICE) values 
-   ('1', '4reht6', '3000'), 
-   ('2', 'ssfj69ij-a', '500'), 
-   ('3', 'futis', '150');
 
+insert into Department (empl_id, e_addr, e_name, e_salary) values 
+   (1, '98 south lane', 'smith,john', 40000), (2, '99 south lane', 'smith,jonny', 60000), (3, '100 south lane', 'Kinddy,Mark', 50000), (4, '101 south lane', 'Oohhun, Lone ', 40000), (5, '102 south lane', 'Sky,Han', 100000);
 
+insert into Location (l_id, l_addr, l_phnum, l_income, l_name) values 
+   (101, '126 that street', 5124891152, 9846000, 'the pink Depot by fengroup');
 
-   
+insert into Buyer (date, b_id, b_name, car_info) values 
+	('43833', 1, 'Smith,Lane ', 'RCA,159648,80000'), ('43834', 2, 'Jack,Train', '4-os,34Fe5e,5000');
 
+insert into Department (Dept_id, d_name, d_salary) values 
+	(11, 'sells_floor', 10000), (12, 'parts', 5000), (13, 'repair', 300);
 
+insert into Parts (part_name, part_num, part_price) values 
+	('battery', 1, 100), ('brakes pads', 2, 25), ('spark plugs', 3, 5), ('fuel injector ', 4, 10), ('radiator', 5, 45), ('car jark', 6, 50), ('nuts ', 7, 0.5), ('bolts', 8, 0.5), ('clutch', 9, 150), ('air filter', 10, 23), ('muffler', 11, 200), ('catalyic converter', 12, 150), ('alternator', 13, 300), ('seats', 14, 255), ('head light blub ', 15, 8), ('oil filter ', 16, 15), ('fuel filter', 17, 5), ('fues', 18, 5), ('brake disc', 19, 30), ('keys', 20, 500);
 
+insert into Car (repair_num, VIN_NUM, repair_price) values 
+	(1, '4reht6', 3000), (2, 'ssfj69ij-a', 500), (3, 'futis', 150);
+
+insert into Inventory(new_used, car_num, company, vin_num, car_price) values 
+	('New', 202, '4-os', '22eft57-a', 59999), ('Used ', 203, '4-os', 'ssfj69ij-a', 29999), ('New', 204, 'RCA', '33gthry7-s', 39999);
