@@ -126,3 +126,59 @@ create table Has(
    car_price INT NOT NULL,
    PRIMARY key (VIN_NUM)
    );
+   insert into Department (EMPL_ID, E_ADDR, E_NAME, E_SALARY) values 
+   ('1', '98 south lane', 'smith,john', '40000'), 
+   ('2', '99 south lane', 'smith,jonny', '60000'), 
+   ('3', '100 south lane', 'Kinddy,Mark', '50000'), 
+   ('4', '101 south lane', 'Oohhun, Lone' , '40000'), 
+   ('5', ' 102south lane', 'Sky,Han', '100000');
+   
+   insert into Department (LOC_ID, L_ADDR, L_PHONE, L_INCOME, L_NAME, PRICE_CHK) values 
+   ('101', '126 that street', '5124891152', '9846000', 'the pink Depot by fengroup', '9840000');
+   
+   insert into Department (BUY_DATE, B_ID, B_NAME, CAR_INFO) values 
+   ('43833', '1', 'Smith,Lane', 'RCA','159648','80000'), 
+   ('43834', '2', 'Jack,Train', '4-os','34Fe5e','5000');
+   
+   insert into Department (DEPT_ID, D_NAME, D_SALARY) values 
+   ('11', 'sells_floor', '10000'), 
+   ('12', 'parts', '5000'), 
+   ('13', 'repair', '300');
+   insert into Department (NEW_USED, CAR_NUM, COMPANY, VIN_NUM, CAR_PRICE) values 
+   ('New', '202', '4-os', '22eft57-a', '59999'), 
+   ('Used ', '203', '4-os', 'ssfj69ij-a', '29999'), 
+   ('New', '204', 'RCA', '33gthry7-s', '39999');
+   
+   insert into Department (PART_NAME, PART_NUM, PART_PRICE) values 
+   ('battery', '1', '100'), 
+   ('brakes pads', '2', '25'), 
+   ('spark plugs', '3', '5'), 
+   ('fuel injector ', '4', '10'), 
+   ('radiator', '5', '45'), 
+   ('car jark', '6', '50'), 
+   ('nuts ', '7', '0.5'), 
+   ('bolts', '8', '0.5'), 
+   ('clutch', '9', '150'), 
+   ('air filter', '10', '23'), 
+   ('muffler', '11', '200'), 
+   ('catalyic converter', '12', '150'), 
+   ('alternator', '13', '300'), 
+   ('seats', '14', '255'), 
+   ('head light blub ', '15', '8'), 
+   ('oil filter ', '16', '15'), 
+   ('fuel filter', '17', '5'), 
+   ('fues', '18', '5'), 
+   ('brake disc', '19', '30'), 
+   ('keys', '20', '500');
+   
+   insert into Department (REPAIR_NO, VIN_NO, REPAIR_PRICE) values 
+   ('1', '4reht6', '3000'), 
+   ('2', 'ssfj69ij-a', '500'), 
+   ('3', 'futis', '150');
+
+
+
+   
+
+
+
