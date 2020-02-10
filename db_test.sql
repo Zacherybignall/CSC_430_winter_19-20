@@ -1,4 +1,3 @@
-
 -- Database: "R1_test"
 /*
 by :
@@ -39,6 +38,7 @@ create table Works_for(
     Constraint l_idFK foreign key (l_id) references Location(l_id),
     Constraint empl_idFK foreign key (empl_id) references Employee(empl_id)
     );
+
 # leave out mangers and supervises for now , need to underatand how supervies would work frist 
 /*    
 create table Manages(
@@ -48,7 +48,6 @@ create table Manages(
     Constraint l_idFK2 foreign key (l_id) references Location(l_id),
     Constraint empl_idFK2 foreign key (empl_id) references Employee(empl_id)
     );
-
 -- this one needs work/incomplete, confused on if it would pull different names for the supervisor and supervisee
 /* create table Supervision(
 	empl_id int(11) NOT NULL,
@@ -57,6 +56,23 @@ create table Manages(
     primary key (empl_id),
     */
     
+#TAS this doesnt work, still trying to also figure this out ^^ ignore if needed
+/*
+ create table Supervisor(
+	empl_id int(11) NOT NULL,
+    manager_id int not null,
+    primary key (empl_id, manager_id),
+    Constraint empl_idFK2 foreign key (empl_id) references Employee(empl_id)
+    );
+
+create table Manages(
+	l_id int(11) NOT NULL,
+    manager_id int not null,
+    PRIMARY KEY (l_id, manager_id),
+    Constraint l_idFK2 foreign key (l_id) references Location(l_id),
+    Constraint manager_idFK2 foreign key (manager_id) references Supervisor(manager_id)
+    );
+*/
 
 -- still a bit confused on how to do these below
 create table Buyer(
@@ -66,15 +82,17 @@ create table Buyer(
 	car_info varchar(50), -- composite/multi value, leave as varchar 
 	 primary key(b_id)
 );
+
 -- from loction , buys_form
 create table Buy_form(
 	invoice_num INT,
-	L_id INT NOT NULL,
+	l_id INT NOT NULL,
 	b_id INT NOT NULL,	
-    Constraint L_id foreign key (L_id) references Location(L_id),
-    Constraint b_id foreign key (b_id) references Buyer(b_id),
+    Constraint l_idFK3 foreign key (l_id) references Location(l_id),
+    Constraint b_idFK3 foreign key (b_id) references Buyer(b_id),
     primary key(l_id,b_id)
 	);
+    
 -- inventory 
    create table Inventory(
    new_used varchar(10),
@@ -84,6 +102,7 @@ create table Buy_form(
    car_price INT NOT NULL,
    PRIMARY key (VIN_NUM)
    );
+   
  -- Department 
 create table Department(
 	 Dep_id INT NOT NULL,
@@ -109,31 +128,40 @@ create table Department(
 create table Sells(
 	Dep_id INT NOT NULL,
 	VIN_NUM varchar(40) NOT NULL,	
-    Constraint Dep_idSFK foreign key (Dep_id) references Department(Dep_id),
-    Constraint VIN_NUMSFK foreign key (VIN_NUM) references Inventory(VIN_NUM),
+    Constraint Dep_idSFK4 foreign key (Dep_id) references Department(Dep_id),
+    Constraint VIN_NUMSFK4 foreign key (VIN_NUM) references Inventory(VIN_NUM),
     primary key(Dep_id,VIN_NUM)
 	);
 create table Has(
 	Dep_id INT NOT NULL,
 	Part_num INT NOT NULL,
-	Constraint Dep_idHFK foreign key (Dep_id) references Department(Dep_id),
-    Constraint Part_numHFK foreign key (Part_num) references Parts(Part_num),
+	Constraint Dep_idHFK5 foreign key (Dep_id) references Department(Dep_id),
+    Constraint Part_numHFK5 foreign key (Part_num) references Parts(Part_num),
     primary key(Dep_id,Part_num)
 	);
     create table Repairs(
 	Dep_id INT NOT NULL,
 	Repair_num INT NOT NULL,	
-    Constraint Dep_idRFK foreign key (Dep_id) references Department(Dep_id),
-    Constraint Repair_numRFK foreign key (Repair_num) references Car(Repair_num),
+    Constraint Dep_idRFK6 foreign key (Dep_id) references Department(Dep_id),
+    Constraint Repair_numRFK6 foreign key (Repair_num) references Car(Repair_num),
     primary key(Dep_id,Repair_num)
 	);
 
 insert into Employee (empl_id, e_addr, e_name, e_salary) values 
    (1, '98 south lane', 'smith,john', 40000), (2, '99 south lane', 'smith,jonny', 60000), (3, '100 south lane', 'Kinddy,Mark', 50000), (4, '101 south lane', 'Oohhun, Lone ', 40000), (5, '102 south lane', 'Sky,Han', 100000);
 
+#insert into Supervisor(manager_id, empl_id) values
+#	(1, 1), (2, 2);
+
 insert into Location (l_id, l_addr, l_phnum, l_income, l_name) values 
    (101, '126 that street', 5124891152, 9846000, 'the pink Depot by fengroup');
-
+   
+insert into Works_for (l_id, empl_id) values
+	(101, 1), (101, 2), (101, 3), (101, 4), (101, 5);
+    
+#insert into Manages (l_id, empl_id) values
+#	(101, 1), (101,3);
+	
 insert into Buyer (date, b_id, b_name, car_info) values 
 	('43833', 1, 'Smith,Lane ', 'RCA,159648,80000'), ('43834', 2, 'Jack,Train', '4-os,34Fe5e,5000');
 
