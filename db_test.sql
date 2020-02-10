@@ -1,3 +1,4 @@
+
 -- Database: "R1_test"
 /*
 by :
@@ -6,15 +7,16 @@ Tracy Samanie
 Zachery Bignall 
 */
 --
-CREATE DATABASE R1_TEST;
+
 DROP DATABASE R1_TEST;
+CREATE DATABASE R1_TEST;
 USE R1_TEST;
  
 -- Employee table
 create table Employee(
 	empl_id int(11) NOT NULL AUTO_INCREMENT,
 	e_addr varchar(50) DEFAULT NULL, 
-	salary DECIMAL(19,9) NOT NULL,
+	e_salary DECIMAL(19,9) NOT NULL,
 	e_name varchar(25) NOT NULL, -- gotta make this a composite/ multi valued?
 	PRIMARY KEY (empl_id)
 );
@@ -23,9 +25,9 @@ create table Employee(
 create table Location(
 	l_id int(11) NOT NULL, 
 	l_addr varchar(50) DEFAULT NULL, 
-	l_phnum int(10) NOT NULL, 
-	l_name varchar(25) NOT NULL, 
-	Income DECIMAL(19,9) NOT NULL,
+	l_phnum varchar(50),
+	l_name varchar(50) NOT NULL, 
+	l_income DECIMAL(19,9) NOT NULL,
     PRIMARY key (l_id)
 );
 
@@ -46,6 +48,7 @@ create table Manages(
     Constraint l_idFK2 foreign key (l_id) references Location(l_id),
     Constraint empl_idFK2 foreign key (empl_id) references Employee(empl_id)
     );
+
 -- this one needs work/incomplete, confused on if it would pull different names for the supervisor and supervisee
 /* create table Supervision(
 	empl_id int(11) NOT NULL,
@@ -67,11 +70,20 @@ create table Buyer(
 create table Buy_form(
 	invoice_num INT,
 	L_id INT NOT NULL,
-	b_id varchar(40) NOT NULL,	
+	b_id INT NOT NULL,	
     Constraint L_id foreign key (L_id) references Location(L_id),
     Constraint b_id foreign key (b_id) references Buyer(b_id),
     primary key(l_id,b_id)
 	);
+-- inventory 
+   create table Inventory(
+   new_used varchar(10),
+   car_num INT,
+   company varchar(15),
+   VIN_NUM varchar(35) NOT NULL,
+   car_price INT NOT NULL,
+   PRIMARY key (VIN_NUM)
+   );
  -- Department 
 create table Department(
 	 Dep_id INT NOT NULL,
@@ -79,29 +91,7 @@ create table Department(
      d_salary INT,
      primary key (Dep_id)
 );
--- from Department , sells , has , repaiers
-create table Sells(
-	Dep_id INT NOT NULL,
-	VIN_NUM varchar(40) NOT NULL,	
-    Constraint Dep_id foreign key (Dep_id) references Department(Dep_id),
-    Constraint VIN_NUM foreign key (VIN_NUM) references Inventory(VIN_NUM),
-    primary key(Dep_id,VIN_NUM)
-	);
-create table Has(
-	Dep_id INT NOT NULL,
-	Part_num varchar(40) NOT NULL,	
-    Constraint Dep_id foreign key (Dep_id) references Department(Dep_id),
-    Constraint Part_num foreign key (Part_num) references Parts(Part_num),
-    primary key(Dep_id,Part_num)
-	);
-    create table Repairs(
-	Dep_id INT NOT NULL,
-	Repair_num INT NOT NULL,	
-    Constraint Dep_id foreign key (Dep_id) references Department(Dep_id),
-    Constraint Repair_num foreign key (Repair_num) references Car(Repair_num),
-    primary key(Dep_id,Repair_num)
-	);
-    -- parts
+ -- parts
     create table Parts(
     part_name varchar(35), 
 	part_num INT NOT NULL, 
@@ -115,17 +105,30 @@ create table Has(
    repair_price INT NOT NULL,
    PRIMARY key (repair_num)
    );
-   -- inventory 
-   create table Inventory(
-   new_used Enum ('New', 'Used'),
-   car_num INT,
-   company varchar(15),
-   VIN_NUM varchar(35) NOT NULL,
-   car_price INT NOT NULL,
-   PRIMARY key (VIN_NUM)
-   );
+-- from Department , sells to intcentory , has to parts  , repaiers to cars 
+create table Sells(
+	Dep_id INT NOT NULL,
+	VIN_NUM varchar(40) NOT NULL,	
+    Constraint Dep_idSFK foreign key (Dep_id) references Department(Dep_id),
+    Constraint VIN_NUMSFK foreign key (VIN_NUM) references Inventory(VIN_NUM),
+    primary key(Dep_id,VIN_NUM)
+	);
+create table Has(
+	Dep_id INT NOT NULL,
+	Part_num INT NOT NULL,
+	Constraint Dep_idHFK foreign key (Dep_id) references Department(Dep_id),
+    Constraint Part_numHFK foreign key (Part_num) references Parts(Part_num),
+    primary key(Dep_id,Part_num)
+	);
+    create table Repairs(
+	Dep_id INT NOT NULL,
+	Repair_num INT NOT NULL,	
+    Constraint Dep_idRFK foreign key (Dep_id) references Department(Dep_id),
+    Constraint Repair_numRFK foreign key (Repair_num) references Car(Repair_num),
+    primary key(Dep_id,Repair_num)
+	);
 
-insert into Department (empl_id, e_addr, e_name, e_salary) values 
+insert into Employee (empl_id, e_addr, e_name, e_salary) values 
    (1, '98 south lane', 'smith,john', 40000), (2, '99 south lane', 'smith,jonny', 60000), (3, '100 south lane', 'Kinddy,Mark', 50000), (4, '101 south lane', 'Oohhun, Lone ', 40000), (5, '102 south lane', 'Sky,Han', 100000);
 
 insert into Location (l_id, l_addr, l_phnum, l_income, l_name) values 
@@ -134,7 +137,7 @@ insert into Location (l_id, l_addr, l_phnum, l_income, l_name) values
 insert into Buyer (date, b_id, b_name, car_info) values 
 	('43833', 1, 'Smith,Lane ', 'RCA,159648,80000'), ('43834', 2, 'Jack,Train', '4-os,34Fe5e,5000');
 
-insert into Department (Dept_id, d_name, d_salary) values 
+insert into Department (Dep_id, d_name, d_salary) values 
 	(11, 'sells_floor', 10000), (12, 'parts', 5000), (13, 'repair', 300);
 
 insert into Parts (part_name, part_num, part_price) values 
@@ -144,4 +147,4 @@ insert into Car (repair_num, VIN_NUM, repair_price) values
 	(1, '4reht6', 3000), (2, 'ssfj69ij-a', 500), (3, 'futis', 150);
 
 insert into Inventory(new_used, car_num, company, vin_num, car_price) values 
-	('New', 202, '4-os', '22eft57-a', 59999), ('Used ', 203, '4-os', 'ssfj69ij-a', 29999), ('New', 204, 'RCA', '33gthry7-s', 39999);
+	('New', 202, '4-os', '22eft57-a', 59999), ('Used', 203, '4-os', 'ssfj69ij-a', 29999), ('New', 204, 'RCA', '33gthry7-s', 39999);
