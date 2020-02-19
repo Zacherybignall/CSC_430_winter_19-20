@@ -1,0 +1,25 @@
+note: first attribute is key .
+E:
+1)Employee(empl_id , e_addr , e_salary , e_name , fee)
+2)Customer(customer_id , c_addr , c_phone , c_name )
+3)cars(vin_num ,	new_used , make , model ,  suggest_price )
+R:
+4)Car_sold( car_sold_id , vin_num , customer_id , empl_id , agreed_price , date_sold  )
+5)car_loan( loan_id , car_sold_id , loan_price ) 
+FD's:
+note: {->} is an right point arrow.
+1)	empl_id	-> e_name,e_salary
+	e_name	-> e_salary
+	empl_id	-> fee
+
+2) 	customer_id	-> c_name,c_phone
+	c_phone 	-> c_name,c_addr
+
+3)	vin_num	-> new_used,make,model,suggest_price
+	vin_num	-> suggest_price
+
+4)	car_sold_id -> customer_id,empl_id,agreed_price,vin_num
+	empl_id,customer_id	-> agreed_price
+	date_sold	-> empl_id,agreed_price,car_sold_id
+
+5)	loan_id,car_loan -> loan_price

@@ -6,13 +6,12 @@ Tracy Samanie
 Zachery Bignall 
 */
 --
-
 DROP DATABASE if exists R3_TEST;
 CREATE DATABASE R3_TEST;
 USE R3_TEST;
 
 #can add location where employee manages
-
+# change this to weekly values for emplyoees??ZAB?
 create table Employee(
 	empl_id int NOT NULL AUTO_INCREMENT,
 	e_addr varchar(50) DEFAULT NULL, 
@@ -78,5 +77,4 @@ insert into car_loan (loan_id, car_sold_id, loan_price) values
     
 select (l.loan_price - s.agreed_price)
 from car_loan l, car_sold s
-where l.car_sold_id = s.car_sold_id
-;
+where l.car_sold_id = s.car_sold_id;
