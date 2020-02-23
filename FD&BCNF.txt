@@ -8,15 +8,13 @@ R:
 5)car_loan( loan_id , car_sold_id , loan_price ) 
 FD's:
 note: {->} is an right point arrow.
-1)	empl_id	-> e_name,e_salary
+1)	empl_id	-> e_name,e_salary,fee
 	e_name	-> e_salary
-	empl_id	-> fee
 
 2) 	customer_id	-> c_name,c_phone
 	c_phone 	-> c_name,c_addr
 
 3)	vin_num	-> new_used,make,model,suggest_price
-	vin_num	-> suggest_price
 
 4)	car_sold_id -> customer_id,empl_id,agreed_price,vin_num
 	empl_id,customer_id	-> agreed_price
