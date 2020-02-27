@@ -5,6 +5,7 @@ Enumerate & describe the integrity constraints
 Explain if BCNF was achieved with tables
 Make a Trigger (if agreed price is 10000 less than sugested price? -idk making up something aka losing money)
 Make a view (maybe use this to see if there is a problem aka loan_price = agreed_price) 
+Update FD's and BCNF txt
 What did everyone do?
 
 update employee commision or fee, we have fee in FDs but not commision, and vice/versa in er, i think emp_commision 
