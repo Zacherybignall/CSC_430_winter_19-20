@@ -73,7 +73,7 @@ insert into cars (new_used, make, model, vin_num, suggest_price) values
 
 #TODO: input from DML {node}
 insert into Car_sold (car_sold_id, vin_num, customer_id, agreed_price, date_sold, empl_id,empl_comission ) values
-	(1, '22eft57-a', 101, 40000, '20-10-9', 1, agreed_price*0.05);
+	(1, '22eft57-a', 101, 40000, '20-10-9', 1, agreed_price*0.02);
 
 insert into car_loan (loan_id, car_sold_id, loan_price) values
 	(00001, 1, 60000);
