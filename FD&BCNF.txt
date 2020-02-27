@@ -19,6 +19,10 @@ note: {->} is an right point arrow.
 4)	car_sold_id -> customer_id,empl_id,agreed_price,vin_num
 	empl_id,customer_id	-> agreed_price
 	date_sold	-> empl_id,agreed_price,car_sold_id,emp_commission
+	
+4)    	car_sold_id -> customer_id, empl_id, customer_id, agreed_price, vin_num, date_sold
+	empl_id -> empl_comission
+	
 
 5)	loan_id,car_loan -> loan_price  #loan_id -> car_loan, loan_price ??
 
