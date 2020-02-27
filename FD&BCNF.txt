@@ -8,7 +8,7 @@ R:
 5)car_loan( loan_id , car_sold_id , loan_price ) 
 FD's:
 note: {->} is an right point arrow.
-1)	empl_id	-> e_name,e_salary,fee
+1)	empl_id	-> e_name,e_salary
 	e_name	-> e_salary   ## e_name -> e_addr ?? ## should i also add e_phone into diagram?
 
 2) 	customer_id	-> c_name,c_phone ## =i would maybe do customer_id -> c_name then,
@@ -18,7 +18,7 @@ note: {->} is an right point arrow.
 
 4)	car_sold_id -> customer_id,empl_id,agreed_price,vin_num
 	empl_id,customer_id	-> agreed_price
-	date_sold	-> empl_id,agreed_price,car_sold_id
+	date_sold	-> empl_id,agreed_price,car_sold_id,emp_commission
 
 5)	loan_id,car_loan -> loan_price  #loan_id -> car_loan, loan_price ??
 
