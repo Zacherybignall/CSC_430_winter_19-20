@@ -21,3 +21,9 @@ note: {->} is an right point arrow.
 	date_sold	-> empl_id,agreed_price,car_sold_id
 
 5)	loan_id,car_loan -> loan_price  #loan_id -> car_loan, loan_price ??
+
+1) IN BCNF
+2) If Original, Not in BCNF (dont need name twice), IF use the other, already in BCNF
+3) IN BCNF
+4) Not in BCNF http://www.ict.griffith.edu.au/~jw/normalization/ind.php#normalizeBCNF
+5) BOTH in BCNf
