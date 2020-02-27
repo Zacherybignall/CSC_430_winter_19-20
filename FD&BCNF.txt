@@ -9,10 +9,10 @@ R:
 FD's:
 note: {->} is an right point arrow.
 1)	empl_id	-> e_name,e_salary,fee
-	e_name	-> e_salary
+	e_name	-> e_salary   ## e_name -> e_addr ?? ## should i also add e_phone into diagram?
 
-2) 	customer_id	-> c_name,c_phone
-	c_phone 	-> c_name,c_addr
+2) 	customer_id	-> c_name,c_phone ## =i would maybe do customer_id -> c_name then,
+	c_phone 	-> c_name,c_addr  ## c_name -> c_phone, c_addr
 
 3)	vin_num	-> new_used,make,model,suggest_price
 
@@ -20,4 +20,4 @@ note: {->} is an right point arrow.
 	empl_id,customer_id	-> agreed_price
 	date_sold	-> empl_id,agreed_price,car_sold_id
 
-5)	loan_id,car_loan -> loan_price
+5)	loan_id,car_loan -> loan_price  #loan_id -> car_loan, loan_price ??
