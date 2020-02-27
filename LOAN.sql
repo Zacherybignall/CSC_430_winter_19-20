@@ -17,7 +17,6 @@ create table Employee(
 	e_addr varchar(50) DEFAULT NULL, 
 	e_salary DECIMAL(19,9) NOT NULL,
 	e_name varchar(25) NOT NULL,
-	e_phone int not null, 
 	PRIMARY KEY (empl_id)
 	);
 
@@ -52,6 +51,17 @@ create table Car_sold(
     	Constraint customer_idFK foreign key (customer_id) references Customer(customer_id),
     	Constraint empl_idFK foreign key (empl_id) references Employee(empl_id)
     	);
+        
+/*Administratve Table - only being filled from trigger */ 
+create table admin_table(
+	car_sold_id int not null,
+    customer_id int, 
+    agreed_price int, 
+    empl_id int, 
+    empl_comission int, 
+    primary key (car_sold_id)
+    );
+/* end admin table */ 
     
 create table car_loan(
 	loan_id int not null,
@@ -73,7 +83,7 @@ insert into cars (new_used, make, model, vin_num, suggest_price) values
 
 #TODO: input from DML {node}
 insert into Car_sold (car_sold_id, vin_num, customer_id, agreed_price, date_sold, empl_id,empl_comission ) values
-	(1, '22eft57-a', 101, 40000, '20-10-9', 1, agreed_price*0.02);
+	(1, '22eft57-a', 101, 40000, '20-10-9', 1, 70000);
 
 insert into car_loan (loan_id, car_sold_id, loan_price) values
 	(00001, 1, 60000);
