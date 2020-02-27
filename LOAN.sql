@@ -17,6 +17,7 @@ create table Employee(
 	e_addr varchar(50) DEFAULT NULL, 
 	e_salary DECIMAL(19,9) NOT NULL,
 	e_name varchar(25) NOT NULL,
+	e_phone int not null, 
 	PRIMARY KEY (empl_id)
 	);
 
