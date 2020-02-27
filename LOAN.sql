@@ -16,7 +16,7 @@ create table Employee(
 	empl_id int NOT NULL AUTO_INCREMENT,
 	e_addr varchar(50) DEFAULT NULL, 
 	e_salary DECIMAL(19,9) NOT NULL,
-	e_name varchar(25) NOT NULL, -- gotta make this a composite/ multi valued?
+	e_name varchar(25) NOT NULL,
 	PRIMARY KEY (empl_id)
 	);
 
@@ -24,7 +24,7 @@ create table Customer(
 	customer_id int NOT NULL AUTO_INCREMENT,
 	c_addr varchar(50) DEFAULT NULL, 
 	c_phone int  NOT NULL,
-	c_name varchar(25) NOT NULL, -- gotta make this a composite/ multi valued?
+	c_name varchar(25) NOT NULL,
 	PRIMARY KEY (customer_id)
 	);
 
@@ -72,7 +72,7 @@ insert into cars (new_used, make, model, vin_num, suggest_price) values
 
 #TODO: input from DML {node}
 insert into Car_sold (car_sold_id, vin_num, customer_id, agreed_price, date_sold, empl_id,empl_comission ) values
-	(1, '22eft57-a', 101, 40000, '20-10-9', 1,1200);
+	(1, '22eft57-a', 101, 40000, '20-10-9', 1, agreed_price*0.05);
 
 insert into car_loan (loan_id, car_sold_id, loan_price) values
 	(00001, 1, 60000);
