@@ -51,18 +51,17 @@ create table Car_sold(
     	Constraint customer_idFK foreign key (customer_id) references Customer(customer_id),
     	Constraint empl_idFK foreign key (empl_id) references Employee(empl_id)
     	);
-        
 /*Administratve Table - only being filled from trigger */ 
 create table admin_table(
-	car_sold_id int not null,
-    customer_id int, 
-    agreed_price int, 
-    empl_id int, 
-    empl_comission int, 
-    primary key (car_sold_id)
+	at_car_sold_id int not null,
+    at_customer_id int, 
+    at_agreed_price int, 
+    at_empl_id int, 
+    at_empl_comission int, 
+    primary key (at_car_sold_id)
     );
 /* end admin table */ 
-    
+
 create table car_loan(
 	loan_id int not null,
 	car_sold_id int,
@@ -70,8 +69,18 @@ create table car_loan(
 	primary key (loan_id),
     	constraint loan_idFK2 foreign key (car_sold_id) references Car_sold(car_sold_id)
     	);
-    
+        
+#makes the triggger 
+DROP TRIGGER IF EXISTS `r3_test`.`car_sold_BEFORE_INSERT`;
 
+DELIMITER $$
+USE `r3_test`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `car_sold_BEFORE_INSERT` BEFORE INSERT ON `car_sold` FOR EACH ROW BEGIN
+	IF (new.empl_comission > (new.agreed_price*0.02)) THEN 
+		INSERT INTO admin_table(at_car_sold_id, at_customer_id, at_agreed_price, at_empl_id, at_empl_comission) VALUES (new.car_sold_id, new.customer_id, new.agreed_price, new.empl_id, new.empl_comission);
+	END IF;
+END$$
+DELIMITER ;
 insert into Employee (empl_id, e_addr, e_name, e_salary) values 
 	(1, '98 south lane', 'smith,john', 40000), (2, '99 south lane', 'smith,jonny', 60000), (3, '100 south lane', 'Kinddy,Mark', 50000), (4, '101 south lane', 'Oohhun, Lone ', 40000), (5, '102 south lane', 'Sky,Han', 100000);
 
@@ -81,7 +90,7 @@ insert into Customer (customer_id, c_name, c_addr, c_phone) values
 insert into cars (new_used, make, model, vin_num, suggest_price) values 
 	('New', 'Honda', 'CR-V', '22eft57-a', 59999), ('Used', 'Jeep', 'Wrangler', 'ssfj69ij-a', 29999);
 
-#TODO: input from DML {node}
+
 insert into Car_sold (car_sold_id, vin_num, customer_id, agreed_price, date_sold, empl_id,empl_comission ) values
 	(1, '22eft57-a', 101, 40000, '20-10-9', 1, 70000);
 
@@ -104,4 +113,3 @@ create view	cars_sold as
     	from car_sold c,cars ca
     	where ca.vin_num = c.vin_num;
 	
-SELECT * FROM cars_sold;
